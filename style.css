@@ -8,6 +8,12 @@ height: 1080px;
     z-index: 5;
 
     left: 50px;
+    width: 125px;
+
+    background-color: RGBA(234,230,230,0.8);
+    border: solid 1px;
+    border-radius: 5px;
+
 
     font-size: 24px;
     font-weight: bold;
