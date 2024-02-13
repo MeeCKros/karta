@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaflet sample</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+</head>
+<body>
+    <div id="map" style="width: 1920px; height: 1080px"></div>
+    <script>
+
+var mapOptions = {
+center: [50.416298143075025, 30.451985993937598],
+ zoom: 8 }
+ var map = new L.map('map', mapOptions);
+var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+// Adding layer to the map
+map.addLayer(layer);
+    </script>
+</body>
+</html>
