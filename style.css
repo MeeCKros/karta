@@ -1,0 +1,61 @@
+#map {
+width: 1920px;
+height: 1080px;
+}
+
+.radio_buttons {
+    position:absolute;
+    z-index: 5;
+
+    left: 50px;
+
+    font-size: 24px;
+    font-weight: bold;
+}
+
+[type="radio"] {
+  display: none;
+
+  &:checked + .pretty-radio:after {
+    display: block;
+  }
+
+  &:checked + .pretty-radio:before {
+    box-shadow: inset 0 0 5px #81BD41;
+  }
+}
+
+.pretty-radio {
+  padding-left: 40px;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  position: relative;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    left: 5px;
+    top: 50%;
+    margin-top: -15px;
+  }
+
+  &:after {
+    content: "";
+    background: #81BD41;
+    display: none;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    left: 12px;
+    top: 50%;
+    margin-top: -8px;
+  }
+}
