@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример карты Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 900px; }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<div id="map-controls">
+    <button onclick="changeMap('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')">OpenStreetMap</button>
+    <button onclick="changeMap('http://88.99.52.156/tmg/{z}/{x}/{y}')">Custom Map</button>
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map;
+
+    function initMap() {
+        map = L.map('map').setView([50.4501, 30.5234], 13);
+
+        changeMap('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+
+        var customMarker = L.marker([50.4501, 30.5234]).addTo(map)
+            .bindPopup("<b>Місто Київ</b><br>Ласкаво просимо!");
+
+        var orangeTrianglePoints = [
+            [50.446, 30.523],
+            [50.446, 30.528],
+            [50.45, 30.531]
+        ];
+
+        var orangeTriangle = L.polygon(orangeTrianglePoints, {color: 'orange'}).addTo(map);
+        orangeTriangle.bindPopup("Это оранжевый треугольник");
+
+        var blueSquarePoints = [
+            [50.451, 30.515],
+            [50.451, 30.52],
+            [50.456, 30.52],
+            [50.456, 30.515]
+        ];
+
+        var blueSquare = L.polygon(blueSquarePoints, {color: 'blue'}).addTo(map);
+        blueSquare.bindPopup("Это синий квадрат");
+
+        var hexagonPoints = [
+            [50.45, 30.525],
+            [50.45, 30.53],
+            [50.453, 30.532],
+            [50.455, 30.527],
+            [50.453, 30.522],
+            [50.45, 30.522]
+        ];
+
+        var hexagon = L.polygon(hexagonPoints, {color: 'green'}).addTo(map);
+        hexagon.bindPopup("Это зеленый шестиугольник");
+
+        var baseMaps = {
+            "OpenStreetMap": L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'),
+            "Custom Map": L.tileLayer('http://88.99.52.156/tmg/{z}/{x}/{y}')
+        };
+
+        var overlayMaps = {
+            "Маркер Києва": customMarker,
+            "Оранжевый треугольник": orangeTriangle,
+            "Синий квадрат": blueSquare,
+            "Зеленый шестиугольник": hexagon
+        };
+
+        L.control.layers(baseMaps, overlayMaps).addTo(map);
+    }
+
+    function changeMap(url) {
+        if (map) {
+            map.eachLayer(function (layer) {
+                map.removeLayer(layer);
+            });
+        }
+
+        L.tileLayer(url, {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+    }
+
+    window.onload = initMap;
+</script>
+</body>
+</html>
